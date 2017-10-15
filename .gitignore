@@ -54,5 +54,5 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# exclude sensitive content
 config.json
