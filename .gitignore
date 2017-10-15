@@ -56,5 +56,3 @@ typings/
 
 # dotenv environment variables file
 config.json
-Archive.zip
-backup.sql
