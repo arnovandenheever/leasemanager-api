@@ -5,15 +5,11 @@ var pool                = mysql.createPool(config.dbConfig);
 
 module.exports.GetStudents = function() {
     var deferred = Q.defer();
-
-    var sql =   "SELECT * FROM Student"
-
-    // let sqlString = `CALL spStudent(?)`;
-
-    // var options = { sql: sqlString, nestTables: true };
-         
-    // pool.query(sqlString, 57, function(error,result){
-    pool.query(sql, function(error,result){        
+    let connection = mysql.createConnection(config.dbConfig);
+    
+    let sql = `CALL spStudents()`;
+    
+    connection.query(sql, (error, result) => {
         if(!error) {
             if (result.length > 0){
                 deferred.resolve(result);
@@ -22,12 +18,40 @@ module.exports.GetStudents = function() {
             }
         } else {
             deferred.reject(error);      
-        }           
+        }  
     });
+ 
+    connection.end();
 
     return deferred.promise;
 
-};
+}
+
+// module.exports.GetStudents = function() {
+//     var deferred = Q.defer();
+
+//     var sql =   "SELECT * FROM Student"
+
+//     // let sqlString = `CALL spStudent(?)`;
+
+//     // var options = { sql: sqlString, nestTables: true };
+        
+//     // pool.query(sqlString, 57, function(error,result){
+//     pool.query(sql, function(error,result){        
+//         if(!error) {
+//             if (result.length > 0){
+//                 deferred.resolve(result);
+//             } else {
+//                 deferred.resolve(null);
+//             }
+//         } else {
+//             deferred.reject(error);      
+//         }           
+//     });
+
+//     return deferred.promise;
+
+// };
 
 module.exports.GetStudentByStudentId = function(studentId) {
 
@@ -43,6 +67,7 @@ module.exports.GetStudentByStudentId = function(studentId) {
 
     // pool.query(sql,function(error,result){
         if(!error) {
+
             if (result.length > 0){
                 deferred.resolve(result);
             } else {

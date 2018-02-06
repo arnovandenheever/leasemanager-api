@@ -6,6 +6,7 @@ module.exports.GetStudents = function (req, res) {
     student.GetStudents()
     .then(function (result) {
         if (result) {
+            console.log(result)            
             res.status(200);
             res.send(result);
         } else {

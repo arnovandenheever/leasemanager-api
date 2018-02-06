@@ -2,21 +2,36 @@ var mysql       = require('mysql');
 var config      = require('../config.json');
 var Q           = require('q');
 var bankpool        = mysql.createPool(config.dbConfig);
+var repo = require('../repository/repository.js')
+
+// module.exports.GetBank = function (){
+//     var deferred = Q.defer();
+
+//     var sql = "SELECT * from Bank"
+    
+//     bankpool.query(sql,function(error,result){
+//         if(!error) {
+//             deferred.resolve(result);
+//         } else {
+//             deferred.reject(error);  
+//         }           
+//     });
+
+//     return deferred.promise;
+
+// }
 
 module.exports.GetBank = function (){
-    var deferred = Q.defer();
+
 
     var sql = "SELECT * from Bank"
-    
-    bankpool.query(sql,function(error,result){
-        if(!error) {
-            deferred.resolve(result);
-        } else {
-            deferred.reject(error);  
-        }           
-    });
 
-    return deferred.promise;
+    // var GB = repo(sql)
+
+    // console.log(GB)
+
+    // return repo(sql)()
+    return sql
 
 }
 

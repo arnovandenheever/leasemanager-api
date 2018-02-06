@@ -2,6 +2,8 @@ var express = require('express');
 var config = require('../config.json');
 var router = express.Router();
 var jwt = require('express-jwt');
+var permission = require('./permission.js')
+
 var auth = jwt({
   secret: config.secret
   // userProperty: 'usertoken'
@@ -39,7 +41,8 @@ router.get('/transaction', auth, ctrlTransaction.GetTransactions);
 router.get('/transaction/lease', auth, ctrlTransaction.GetTransactionsByLeaseId);
 router.post('/transaction/transaction', auth, ctrlTransaction.InsertTransaction);
 router.delete('/transaction/transaction', auth, ctrlTransaction.DeleteTransaction);
-router.get('/student', auth, ctrlStudent.GetStudents);
+// router.get('/student', auth, permission.permit('admin','student','management'), ctrlStudent.GetStudents);
+router.get('/student', auth, permission.permit('admin'), ctrlStudent.GetStudents);
 router.get('/student/student', auth, ctrlStudent.GetStudentByStudentId);
 router.put('/student', auth, ctrlStudent.UpdateStudent);
 router.post('/student', auth, ctrlStudent.CreateStudent);

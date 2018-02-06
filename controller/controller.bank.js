@@ -1,12 +1,14 @@
 var BankValidator    = require('../validation/validation.bank');
 var Bank = require('../repository/repository.bank');
-// var Repository = require('../repository/repository')
+var Repository = require('../repository/repository')
 
 module.exports.GetBank = function (req, res) {
 
     // repo = new Repository;
 
-    Bank.GetBank()
+    Repository(Bank.GetBank())()
+
+    // Bank.GetBank()
     .then(function (result) {
         if (result.length > 0) {
             res.status(200);

@@ -37,12 +37,7 @@ module.exports.UpdateBank = function (req, res) {
             .then(updateBank(result))
             .catch(responseError(error))
 
-
 }
-
-
-
-
 
 module.exports.UpdateBank = function (req, res) {
     BankValidator.ValidateRequest(req)
